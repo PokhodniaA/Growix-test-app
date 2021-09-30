@@ -2,7 +2,7 @@
   <div>
     <Header />
     <b-container fluid="lg">
-      <Nuxt />
+      <Nuxt class="content"/>
     </b-container>
   </div>
 </template>
@@ -17,3 +17,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.content{
+  height: calc(100vh - 56px);
+}
+</style>
