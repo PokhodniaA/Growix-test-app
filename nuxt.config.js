@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'growix-test',
+    title: 'Growix',
     htmlAttrs: {
       lang: 'en'
     },
@@ -48,6 +48,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     "@nuxtjs/style-resources",
+    '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -55,5 +56,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  i18n: {},
 }
