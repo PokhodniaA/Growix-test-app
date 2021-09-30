@@ -1,6 +1,6 @@
 <template>
   <main class="home">
-    <Auth />
+    <Auth :email-prop="email" @submit="submit" />
   </main>
 </template>
 
@@ -11,6 +11,15 @@ import Auth from '@/components/collections/Auth/Auth.vue'
 export default Vue.extend({
   components: { Auth },
   layout: 'Main',
+  data: () => ({
+    email: '' as String,
+  }),
+  methods: {
+    submit(email: String): void {
+      this.email = email;
+      this.$router.push(this.localePath({ name: 'result' }))
+    },
+  },
 })
 </script>
 

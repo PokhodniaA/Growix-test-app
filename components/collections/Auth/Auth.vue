@@ -13,7 +13,7 @@
           :state="showErrors"
           aria-describedby="input-email-feedback"
           :placeholder="$t('form.placeholder')"
-          @input="checkErrors"
+          @change="checkErrors"
         ></b-form-input>
 
         <!-- This will only be shown if the preceding input has an invalid state -->
@@ -33,44 +33,67 @@
 import Vue from 'vue'
 import FormWrapper from '@/components/ui/FormWrapper.vue'
 import { validationMixin } from 'vuelidate'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import {
+  required,
+  minLength,
+  maxLength,
+  ValidationRule,
+} from 'vuelidate/lib/validators'
+import { FormError } from '@/types/auth.type'
+import { TranslateResult } from 'vue-i18n'
 
-// const emailValidator: ValidationRule = function (email: any): Boolean {
-//   return true
-// }
+// !!!!! Change any for prop !!!!!
+// Email validation function
+const emailValidator: any = (email: String): Boolean => {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(String(email).toLowerCase())
+}
 
 export default Vue.extend({
   components: { FormWrapper },
+  props: {
+    emailProp: {
+      type: String,
+      default: '' as String,
+    },
+  },
   mixins: [validationMixin],
   data: () => ({
     email: '' as String,
-    showErrors: null as null | Boolean,
+    showErrors: null as FormError,
   }),
   computed: {
     isValid(): Boolean {
       this.$v.$touch()
       return !this.$v.$invalid
     },
-    getValidationText(): String {
+    getValidationText(): TranslateResult {
+      // !!!!! Change any to proper type !!!!!!
       if (!this.$v.email.required) {
-        // return this.$i18n.t('form.errors.required')
+        return this.$i18n.t('form.errors.required')
       }
 
       if (!this.$v.email.minLength) {
-        return `Email must have at least ${this.$v.email.$params.minLength.min} letters`
+        return this.$i18n.t('form.errors.minLength')
       }
 
       if (!this.$v.email.maxLength) {
-        return `Email must have at least ${this.$v.email.$params.maxLength.max} letters`
+        return this.$i18n.t('form.errors.maxLength')
       }
 
-      return "Invalid email address.  Valid e-mail can contain only latin letters, numbers, '@' and '.'"
+      return this.$i18n.t('form.errors.email')
     },
+  },
+  mounted() {
+    if (this.emailProp) {
+      this.email = this.emailProp
+    }
   },
   methods: {
     onSubmit(): void {
       if (this.isValid) {
-        console.log('submit')
+        this.$emit('submit', this.email)
       }
     },
     checkErrors(): void {
@@ -79,7 +102,7 @@ export default Vue.extend({
   },
   validations: {
     email: {
-      // emailValidator,
+      emailValidator,
       required,
       minLength: minLength(5),
       maxLength: maxLength(100),
