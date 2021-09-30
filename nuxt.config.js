@@ -58,5 +58,10 @@ export default {
   build: {
   },
 
-  i18n: {},
+  i18n: {
+    locales: [{code: 'en', iso: 'en-US', file: 'en.js'}],
+    defaultLocale: 'en',
+    strategy: 'prefix',
+    langDir: '~/assets/lang/',
+  },
 }

@@ -8,8 +8,12 @@
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#">Link</b-nav-item>
-          <b-nav-item href="#">Disabled</b-nav-item>
+          <b-nav-item :to="localePath({ name: 'index' })">{{
+            $t('routeLinks.home')
+          }}</b-nav-item>
+          <b-nav-item :to="localePath({ name: 'result' })">{{
+            $t('routeLinks.result')
+          }}</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-container>
