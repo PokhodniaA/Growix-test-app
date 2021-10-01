@@ -17,7 +17,7 @@ import Card from '@/components/ui/Card.vue'
 export default Vue.extend({
   components: { Card },
   filters: {
-    capitalize: function (value: String) {
+    capitalize: function (value: String): String {
       if (!value) return ''
       return value[0].toUpperCase() + value.slice(1, value.length)
     },

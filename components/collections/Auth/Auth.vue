@@ -77,7 +77,7 @@ export default Vue.extend({
       return this.$i18n.t('form.errors.email')
     },
   },
-  mounted() {
+  mounted(): void {
     if (this.emailProp) {
       this.email = this.emailProp
     }
