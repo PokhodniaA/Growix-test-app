@@ -7,7 +7,7 @@ export type QueryParam = string | (string | null)[]
 
 // INTERFACES
 
-export interface Posts {
+export interface Post {
     readonly id: Number,
     readonly userId: Number,
     readonly title: String,

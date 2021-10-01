@@ -11,13 +11,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Posts } from '@/types/posts.type'
+import { Post } from '@/types/posts.type'
 import Card from '@/components/ui/Card.vue'
 
 export default Vue.extend({
   props: {
     posts: {
-      type: Array as () => Posts[],
+      type: Array as () => Post[],
       required: true,
     },
   },
