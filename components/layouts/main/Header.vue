@@ -1,6 +1,6 @@
 <template>
   <header>
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark" variant="primary">
       <b-container fluid="lg">
         <b-navbar-brand href="#">Growix</b-navbar-brand>
 
