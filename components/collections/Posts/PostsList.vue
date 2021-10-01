@@ -3,7 +3,7 @@
     <b-col v-for="post in posts" :key="post.id" sm="12" md="4" class="mb-4">
       <Card>
         <template #title>{{ post.title | capitalize }}</template>
-        <template #body>{{ post.body }}</template>
+        <template #body>{{ post.body | capitalize }}</template>
       </Card>
     </b-col>
   </b-row>
