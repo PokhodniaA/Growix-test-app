@@ -41,14 +41,7 @@ import {
 } from 'vuelidate/lib/validators'
 import { FormError } from '@/types/auth.type'
 import { TranslateResult } from 'vue-i18n'
-
-// !!!!! Change any for prop !!!!!
-// Email validation function
-const emailValidator: any = (email: String): Boolean => {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return re.test(String(email).toLowerCase())
-}
+import { emailValidator } from '@/mixins/validationMixin'
 
 export default Vue.extend({
   components: { FormWrapper },
@@ -69,7 +62,6 @@ export default Vue.extend({
       return !this.$v.$invalid
     },
     getValidationText(): TranslateResult {
-      // !!!!! Change any to proper type !!!!!!
       if (!this.$v.email.required) {
         return this.$i18n.t('form.errors.required')
       }
