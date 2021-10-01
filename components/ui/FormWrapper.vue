@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
 .wrapper {
-  border: 1px solid $gray-500;
+  border: 1px solid $border;
   border-radius: 5px;
 }
 </style>
