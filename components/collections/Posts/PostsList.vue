@@ -1,0 +1,26 @@
+<template>
+  <b-row>
+    <b-col v-for="post in posts" :key="post.id" sm="12" md="4" class="mb-4">
+      <Card>
+        <template #title>{{ post.title }}</template>
+        <template #body>{{ post.body }}</template>
+      </Card>
+    </b-col>
+  </b-row>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Posts } from '@/types/posts.type'
+import Card from '@/components/ui/Card.vue'
+
+export default Vue.extend({
+  props: {
+    posts: {
+      type: Array as () => Posts[],
+      required: true,
+    },
+  },
+  components: { Card },
+})
+</script>

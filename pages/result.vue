@@ -1,32 +1,44 @@
 <template>
   <main>
-    <b-pagination
-      v-if="!loading"
-      v-model="page"
-      :total-rows="rows"
-      :per-page="page_number"
-      aria-controls="my-table"
-      @input="changePage"
-    ></b-pagination>
+    <PostsList v-if="!loading" :posts="posts" class="mt-3 mt-md-5" />
 
-    <b-spinner v-if="loading" label="Loading..." variant="primary"></b-spinner>
+    <b-row class="justify-content-center">
+      <b-pagination
+        v-if="!loading"
+        v-model="page"
+        :total-rows="rows"
+        :per-page="page_number"
+        aria-controls="my-table"
+        @input="changePage"
+      ></b-pagination>
+    </b-row>
+
+    <b-row
+      v-if="loading"
+      class="justify-content-center align-items-center h-100"
+    >
+      <b-spinner label="Loading..." variant="primary"></b-spinner>
+    </b-row>
   </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { PageNumber, QueryParam } from '@/types/posts.type'
+import { PageNumber, QueryParam, Posts } from '@/types/posts.type'
+import PostsList from '@/components/collections/Posts/PostsList.vue'
 
 export default Vue.extend({
   layout: 'Main',
+  components: { PostsList },
   data: () => ({
     page: 1 as Number,
-    page_number: null as PageNumber, // Change type
+    page_number: null as PageNumber,
     rows: 100 as Number,
     loading: true as Boolean,
+    posts: [] as Posts[],
   }),
   mounted(): void {
-    const queryPage: QueryParam = this.$route.query.page // Change type
+    const queryPage: QueryParam = this.$route.query.page
     if (queryPage && typeof queryPage === 'string') {
       this.page = parseInt(queryPage, 10)
       console.log(this.page, 'MOINTRD')
@@ -37,11 +49,13 @@ export default Vue.extend({
   methods: {
     async getPosts(): Promise<void> {
       this.loading = true
+
       const response = await this.$axios.get(`posts?_page=${this.page}`)
       this.page_number = Math.round(response.data.length)
-      // Write data
-      console.log(response)
+      this.posts = response.data
+
       this.loading = false
+      console.log(this.posts)
     },
     changePage(): void {
       this.$router.push({ query: { page: this.page as any } })
