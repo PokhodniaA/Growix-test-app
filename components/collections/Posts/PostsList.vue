@@ -15,18 +15,18 @@ import { Post } from '@/types/posts.type'
 import Card from '@/components/ui/Card.vue'
 
 export default Vue.extend({
+  components: { Card },
+  filters: {
+    capitalize: function (value: String) {
+      if (!value) return ''
+      return value[0].toUpperCase() + value.slice(1, value.length)
+    },
+  },
   props: {
     posts: {
       type: Array as () => Post[],
       required: true,
     },
   },
-  components: { Card },
-  filters: {
-  capitalize: function (value: String) {
-    if (!value) return ''
-    return value[0].toUpperCase() + value.slice(1, value.length)
-  }
-}
 })
 </script>

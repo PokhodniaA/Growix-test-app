@@ -28,8 +28,8 @@ import { PageNumber, QueryParam, Post } from '@/types/posts.type'
 import PostsList from '@/components/collections/Posts/PostsList.vue'
 
 export default Vue.extend({
-  layout: 'Main',
   components: { PostsList },
+  layout: 'Main',
   data: () => ({
     page: 1 as Number,
     page_number: null as PageNumber,

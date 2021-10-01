@@ -1,6 +1,6 @@
 <template>
   <FormWrapper>
-    <b-form @submit.prevent="onSubmit" novalidate>
+    <b-form novalidate @submit.prevent="onSubmit">
       <b-form-group
         id="input-group-1"
         :label="$t('form.label') + ':'"
@@ -31,27 +31,27 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FormWrapper from '@/components/ui/FormWrapper.vue'
 import { validationMixin } from 'vuelidate'
 import {
   required,
   minLength,
   maxLength,
-  ValidationRule,
 } from 'vuelidate/lib/validators'
-import { FormError } from '@/types/auth.type'
 import { TranslateResult } from 'vue-i18n'
+import FormWrapper from '@/components/ui/FormWrapper.vue'
 import { emailValidator } from '@/mixins/validationMixin'
+import { FormError } from '@/types/auth.type'
+
 
 export default Vue.extend({
   components: { FormWrapper },
+  mixins: [validationMixin],
   props: {
     emailProp: {
       type: String,
       default: '' as String,
     },
   },
-  mixins: [validationMixin],
   data: () => ({
     email: '' as String,
     showErrors: null as FormError,
