@@ -13,5 +13,8 @@ export default {
             maxLength: 'Email must have at least 100 letters',
             email: "Invalid email address.  Valid e-mail can contain only latin letters, numbers, '@' and '.'",
         }
+    },
+    result: {
+        capitalizeButton: 'Capitalize Titles',
     }
 }

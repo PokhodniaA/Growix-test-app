@@ -1,12 +1,6 @@
 <template>
   <main>
-    <CapitalizeTitleButton
-      class="my-3 my-md-5"
-      :posts="posts"
-      @change="capitalizeTitles"
-    />
-
-    <PostsList v-if="!loading" :posts="posts" />
+    <PostsList v-if="!loading" :posts="posts" class="mt-3 my-mt-5" />
 
     <b-row class="justify-content-center">
       <b-pagination
@@ -32,11 +26,10 @@
 import Vue from 'vue'
 import { PageNumber, QueryParam, Post } from '@/types/posts.type'
 import PostsList from '@/components/collections/Posts/PostsList.vue'
-import CapitalizeTitleButton from '@/components/collections/Posts/CapitalizeTitleButton.vue'
 
 export default Vue.extend({
   layout: 'Main',
-  components: { PostsList, CapitalizeTitleButton },
+  components: { PostsList },
   data: () => ({
     page: 1 as Number,
     page_number: null as PageNumber,
@@ -48,7 +41,6 @@ export default Vue.extend({
     const queryPage: QueryParam = this.$route.query.page
     if (queryPage && typeof queryPage === 'string') {
       this.page = parseInt(queryPage, 10)
-      console.log(this.page, 'MOINTRD')
     }
 
     this.getPosts()
@@ -62,15 +54,11 @@ export default Vue.extend({
       this.posts = response.data
 
       this.loading = false
-      console.log(this.posts)
     },
     changePage(): void {
       this.$router.push({ query: { page: this.page as any } })
 
       this.getPosts()
-    },
-    capitalizeTitles(newPosts: Post[]): void {
-      this.posts = newPosts
     },
   },
 })

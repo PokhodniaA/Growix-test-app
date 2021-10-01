@@ -2,7 +2,7 @@
   <b-row>
     <b-col v-for="post in posts" :key="post.id" sm="12" md="4" class="mb-4">
       <Card>
-        <template #title>{{ post.title }}</template>
+        <template #title>{{ post.title | capitalize }}</template>
         <template #body>{{ post.body }}</template>
       </Card>
     </b-col>
@@ -22,5 +22,11 @@ export default Vue.extend({
     },
   },
   components: { Card },
+  filters: {
+  capitalize: function (value: String) {
+    if (!value) return ''
+    return value[0].toUpperCase() + value.slice(1, value.length)
+  }
+}
 })
 </script>
