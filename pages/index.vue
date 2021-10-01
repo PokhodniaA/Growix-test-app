@@ -23,8 +23,3 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
-.home {
-  // height: calc(100vh - 56px);
-}
-</style>
